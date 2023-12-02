@@ -12,10 +12,11 @@ find_digits = fn s ->
   "#{digits}" # convert from charlist to string
 end
 
-digit_strings = Enum.map(calibrations, find_digits)
-
 calibration_accumulator = fn digit_string, acc ->
   first_and_last = String.at(digit_string, 0) <> String.at(digit_string, -1)
   String.to_integer(first_and_last) + acc
 end
-IO.puts(Enum.reduce(digit_strings, 0, calibration_accumulator))
+
+Enum.map(calibrations, find_digits)
+|> Enum.reduce(0, calibration_accumulator)
+|> IO.puts
