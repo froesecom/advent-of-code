@@ -1002,10 +1002,12 @@ calibrations = [
 ]
 
 unicode_decimal_range = 48..57
+
 find_digits = fn s ->
   charlist = to_charlist(s)
   digits = Enum.filter(charlist, fn char -> Enum.member?(unicode_decimal_range, char) end)
-  "#{digits}" # convert from charlist to string
+  # convert from charlist to string
+  "#{digits}"
 end
 
 calibration_accumulator = fn digit_string, acc ->
@@ -1015,4 +1017,4 @@ end
 
 Enum.map(calibrations, find_digits)
 |> Enum.reduce(0, calibration_accumulator)
-|> IO.puts
+|> IO.puts()

@@ -36,11 +36,10 @@ defmodule Advent.Day1_2 do
   defp find_last_digit(s) do
     reversed_regex = ~r/(enin|thgie|neves|xis|evif|ruof|eerht|owt|eno|9|8|7|6|5|4|3|2|1)/
     reversed_string = String.reverse(s)
-    Regex.run(reversed_regex, reversed_string) |> Enum.at(0) |> String.reverse
+    Regex.run(reversed_regex, reversed_string) |> Enum.at(0) |> String.reverse()
   end
 
   defp calibration_accumulator(digit_string, acc) do
     String.to_integer(digit_string) + acc
   end
-
 end

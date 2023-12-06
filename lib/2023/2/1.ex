@@ -10,14 +10,17 @@ defmodule Advent.Day2_1 do
     defp less_or_equal(rule, game) do
       target = rule[:target]
       color = rule[:forColor]
-      Enum.all?(game[:checks], fn (check) -> !Map.get(check, color) || Map.get(check, color) |> String.to_integer <= target end)
+
+      Enum.all?(game[:checks], fn check ->
+        !Map.get(check, color) || Map.get(check, color) |> String.to_integer() <= target
+      end)
     end
   end
 
   def run(game_checks, validation_rules) do
-    Enum.reduce(game_checks, 0, fn (game, acc) ->
+    Enum.reduce(game_checks, 0, fn game, acc ->
       if game_valid?(game, validation_rules) do
-       game[:id] + acc
+        game[:id] + acc
       else
         acc
       end
