@@ -1,21 +1,23 @@
 defmodule Advent.Day7_1 do
   def run(input) do
     parse(input)
-    |> categorize
+    |> Enum.map(&append_hand_power/1)
   end
 
-  defp categorize(hands) do
-    # [[hand, bid, category]]
-    Enum.at(hands, 0) |> IO.puts
-    Enum.map(hands, &append_hand_type/1)
+  defp append_hand_power([hand | tail]) do
+    # -> [hand, bid, power]
+    power = String.to_charlist(hand)
+    |> Enum.frequencies
+    |> Map.values
+    |> Enum.sort
+    |> Enum.join("")
+
+    # TODO: map to hand strength here
+    List.flatten([hand, tail, power])
   end
 
-  defp append_hand_type(hand) do
-    # IO.puts hand
-  end
-
-  def parse(input) do
-    # [[hand, bid]]
+  defp parse(input) do
+    # -> [[hand, bid]]
     String.split(input, "\n", trim: true)
     |> Enum.map(&String.split(&1, " ", trim: true))
     |> Enum.map(fn ([hand | bid]) ->
