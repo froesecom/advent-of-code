@@ -50,8 +50,8 @@ defmodule Poker.Hand.Part2 do
     A: 12,
     K: 11,
     Q: 10,
-    J: 9,
-    T: 8
+    J: 0,
+    T: 9
   }
 
   @wildcard 74 # "J" decimal value
@@ -63,8 +63,9 @@ defmodule Poker.Hand.Part2 do
     |> Enum.map(fn ({char, index}) ->
       char_atom = String.to_atom(char)
       # if it's not a face card then
-      # it's a numerical card that needs to be zero indexed "2" -> 0
-      value = @face_card_base13_map[char_atom] || String.to_integer(char) - 2
+      # it's a numerical card that needs to be zero indexed "1" -> 0
+      # "J" wildcard is the 0 in this problem
+      value = @face_card_base13_map[char_atom] || String.to_integer(char) - 1
       value * (13 ** index) # translate to base 13
     end)
     |> Enum.sum()
