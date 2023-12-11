@@ -4,6 +4,6 @@ defmodule AdventTest.Day7_2 do
 
   test "run" do
     result = Advent.Day7_2.run(File.read!("test/2023/7/1_input.txt"))
-    assert result == 251481660
+    assert result == 251_481_660
   end
 end
