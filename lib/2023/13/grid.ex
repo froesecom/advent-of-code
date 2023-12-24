@@ -1,22 +1,18 @@
 defmodule Grid.Reflection do
   def horizontal_at?(grid, index_a, index_b) do
-    val_a = Enum.at(grid, index_a)
-    val_b = Enum.at(grid, index_b)
-
-    # we've reached the edge of the grid which reflects everything
-    if val_a == nil || val_b == nil do
-      true
-    else
-      {row_a, _i} = Enum.at(grid, index_a)
-      {row_b, _i} = Enum.at(grid, index_b)
-
-      # if rows do not match == not a reflection
-      # if they match, we need to check remaining rows
+    with {row_a, _} when row_a != nil <- Enum.at(grid, index_a),
+         {row_b, _} when row_b != nil <- Enum.at(grid, index_b) do
       if row_a != row_b do
+        # the rows don't match, so not a reflection
         false
       else
+        # the rows match, but we need to keep iterating outwards to check the remaining rows
         __MODULE__.horizontal_at?(grid, index_a - 1, index_b + 1)
       end
+    else
+      _ ->
+        # the row is nil, meaning we've passed the edge of the grid and nil reflects everything
+        true
     end
   end
 
