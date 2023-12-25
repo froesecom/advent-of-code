@@ -2,6 +2,34 @@ defmodule GridTest.Reflection do
   use ExUnit.Case
   doctest Grid.Reflection
 
+  describe "vertical_at?" do
+    test "returns true for vertical reflection" do
+      grid = [
+        {"#.##.#.", 0},
+        {"######.", 1},
+        {"######.", 2},
+        {"#.##.#.", 3},
+        {"#.##.##", 4}
+      ]
+
+      result = Grid.Reflection.vertical_at?(grid, 2, 3)
+      assert result == true
+    end
+
+    test "returns false when no vertical reflection found" do
+      grid = [
+        {"#.##.#.", 0},
+        {"####.#.", 1},
+        {"######.", 2},
+        {"#.##.#.", 3},
+        {"#.##.##", 4}
+      ]
+
+      result = Grid.Reflection.vertical_at?(grid, 2, 3)
+      assert result == false
+    end
+  end
+
   describe "horizontal_at?" do
     test "it returns true for horizontal reflections" do
       grid = [
