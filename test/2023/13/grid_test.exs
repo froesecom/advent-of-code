@@ -5,11 +5,11 @@ defmodule GridTest.Reflection do
   describe "vertical_at?" do
     test "returns true for vertical reflection" do
       grid = [
-        {"#.##.#.", 0},
-        {"######.", 1},
-        {"######.", 2},
-        {"#.##.#.", 3},
-        {"#.##.##", 4}
+        ~c"#.##.#.",
+        ~c"######.",
+        ~c"######.",
+        ~c"#.##.#.",
+        ~c"#.##.##"
       ]
 
       result = Grid.Reflection.vertical_at?(grid, 2, 3)
@@ -18,11 +18,11 @@ defmodule GridTest.Reflection do
 
     test "returns false when no vertical reflection found" do
       grid = [
-        {"#.##.#.", 0},
-        {"####.#.", 1},
-        {"######.", 2},
-        {"#.##.#.", 3},
-        {"#.##.##", 4}
+        ~c"#.##.#.",
+        ~c"####.#.",
+        ~c"######.",
+        ~c"#.##.#.",
+        ~c"#.##.##"
       ]
 
       result = Grid.Reflection.vertical_at?(grid, 2, 3)
@@ -41,6 +41,19 @@ defmodule GridTest.Reflection do
       ]
 
       result = Grid.Reflection.horizontal_at?(grid, 1, 2)
+      assert result == true
+    end
+
+    test "it returns true for horizontal reflections in first row" do
+      grid = [
+        {"###..#.", 0},
+        {"###..#.", 1},
+        {"#.#..#.", 2},
+        {"#.#..#.", 3},
+        {"#.#..##", 4}
+      ]
+
+      result = Grid.Reflection.horizontal_at?(grid, 0, 1)
       assert result == true
     end
 

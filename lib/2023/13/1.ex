@@ -2,6 +2,34 @@ defmodule Advent.Day13_1 do
   def run(input) do
     parse(input)
     |> Enum.map(&deduce_row_reflection/1)
+    |> Enum.map(&deduce_column_reflection/1)
+  end
+
+  defp deduce_column_reflection(puzzle) do
+    # we've already categorized it
+    if puzzle[:reflection_type] do
+      puzzle
+    else
+      input = puzzle[:input]
+      first_row = Enum.at(input, 0) |> Enum.with_index()
+      columns_0_indexed = length(first_row) - 1
+
+      Enum.reduce_while(first_row, puzzle, fn {_char, index}, acc ->
+        IO.puts(index)
+        # we're at the end
+        if index == columns_0_indexed do
+          {:halt, acc}
+        else
+          case Grid.Reflection.vertical_at?(input, index, index + 1) do
+            true ->
+              {:halt, Map.merge(puzzle, %{reflection: index, reflection_type: :column})}
+
+            false ->
+              {:cont, acc}
+          end
+        end
+      end)
+    end
   end
 
   defp deduce_row_reflection(puzzle) do
