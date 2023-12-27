@@ -15,7 +15,6 @@ defmodule Advent.Day13_1 do
       columns_0_indexed = length(first_row) - 1
 
       Enum.reduce_while(first_row, puzzle, fn {_char, index}, acc ->
-        IO.puts(index)
         # we're at the end
         if index == columns_0_indexed do
           {:halt, acc}
@@ -36,7 +35,7 @@ defmodule Advent.Day13_1 do
     indexed_rows = Enum.with_index(puzzle[:input])
     length_0_indexed = length(indexed_rows) - 1
 
-    Enum.reduce_while(indexed_rows, puzzle, fn {row, index}, acc ->
+    Enum.reduce_while(indexed_rows, puzzle, fn {_row, index}, acc ->
       # we're at the end
       if index == length_0_indexed do
         {:halt, acc}
@@ -54,16 +53,15 @@ defmodule Advent.Day13_1 do
 
   defp parse(input) do
     # ~> [{input: puzzle, reflection: nil, reflection_type: nil}]
-    parsed_input =
-      String.split(input, "\n\n", trim: true)
-      |> Enum.map(fn puzzle ->
-        %{
-          input:
-            String.split(puzzle, "\n", trim: true)
-            |> Enum.map(&String.to_charlist/1),
-          reflection: nil,
-          reflection_type: nil
-        }
-      end)
+    String.split(input, "\n\n", trim: true)
+    |> Enum.map(fn puzzle ->
+      %{
+        input:
+          String.split(puzzle, "\n", trim: true)
+          |> Enum.map(&String.to_charlist/1),
+        reflection: nil,
+        reflection_type: nil
+      }
+    end)
   end
 end

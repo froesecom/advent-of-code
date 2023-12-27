@@ -1,6 +1,6 @@
 defmodule Grid.Reflection do
   # we've reached the start of the grid, which reflects everything
-  def horizontal_at?(grid, row_index_a, row_index_b) when row_index_a < 0, do: true
+  def horizontal_at?(_grid, row_index_a, _row_index_b) when row_index_a < 0, do: true
 
   def horizontal_at?(grid, row_index_a, row_index_b) do
     with {row_a, _} <- Enum.at(grid, row_index_a),
@@ -20,7 +20,7 @@ defmodule Grid.Reflection do
   end
 
   # we've reached the start of the grid, which reflects everything
-  def vertical_at?(grid, column_index_a, column_index_b) when column_index_a < 0, do: true
+  def vertical_at?(_grid, column_index_a, _column_index_b) when column_index_a < 0, do: true
 
   def vertical_at?(grid, column_index_a, column_index_b) do
     Enum.reduce_while(grid, true, fn row, _acc ->
