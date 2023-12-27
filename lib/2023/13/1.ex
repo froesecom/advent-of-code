@@ -3,6 +3,23 @@ defmodule Advent.Day13_1 do
     parse(input)
     |> Enum.map(&deduce_row_reflection/1)
     |> Enum.map(&deduce_column_reflection/1)
+    |> sum_reflections
+  end
+
+  defp sum_reflections(reflections) do
+    Enum.reduce(reflections, 0, fn %{input: _input, reflection_type: type, reflection: index},
+                                   acc ->
+      # remove zero index
+      n = index + 1
+
+      case type do
+        :column ->
+          acc + n
+
+        :row ->
+          acc + 100 * n
+      end
+    end)
   end
 
   defp deduce_column_reflection(puzzle) do
