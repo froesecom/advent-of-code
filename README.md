@@ -6,6 +6,8 @@ Where I keep my [Advent of Code](https://adventofcode.com/) scripts
 
 `mix test` to run tests
 
+To run a single test suite `mix test --only describe:"Advent.Day12_1.run/1"`
+
 
 ## formatting
 
