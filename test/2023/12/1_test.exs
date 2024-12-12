@@ -5,7 +5,6 @@ defmodule AdventTest.Day12_1 do
   describe "Advent.Day12_1.run/1" do
     test "run 1_data_small" do
       result = Advent.Day12_1.run(File.read!("test/2023/12/1_data_small.txt"))
-      IO.puts(result)
       assert result == 21
     end
   end
