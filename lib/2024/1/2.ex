@@ -19,14 +19,13 @@ defmodule Advent.Y2024.D1_2 do
   end
 
   defp reduce_similarities(input) do
-    first = Enum.with_index(Enum.at(input, 0))
+    first = Enum.at(input, 0)
     second = Enum.at(input, 1)
 
-    _reduce_smiliarity = fn tuple, acc ->
-      {n, index} = tuple
+    reduce_smiliarity = fn n, acc ->
       acc + n * Enum.count(second, fn x -> n == x end)
     end
 
-    Enum.reduce(first, 0, _reduce_smiliarity)
+    Enum.reduce(first, 0, reduce_smiliarity)
   end
 end
